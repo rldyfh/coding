@@ -1,6 +1,6 @@
 package level_01;
 
-import.java.util.*;
+import java.util.*;
 
 public class budget {
 
