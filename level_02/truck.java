@@ -22,7 +22,7 @@ public class truck {
 	                    if(sum + truck > weight){
 	                        answer++;
 	                        q.add(0);
-	                    }else{
+	                    }else {
 	                        q.add(truck);
 	                        answer++;
 	                        sum += truck;
