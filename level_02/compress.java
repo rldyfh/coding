@@ -33,4 +33,9 @@ public class compress {
         }
         return answer;
     }
+	public static void main(String[] args) {
+		compress c = new compress();
+		int a = c.solution("aabbcc");
+		System.out.println(a);
+	}
 }
