@@ -19,7 +19,7 @@ public class network {
 		check[i] = true;
 		
 		for(int j = 0  ; j < computers.length ; j++) {
-			if( i !=j && computers[i][j] == 1 && check[j] == false) {
+			if( i != j && computers[i][j] == 1 && check[j] == false) {
 				check = dfs(computers, j , check);
 			}
 		}
