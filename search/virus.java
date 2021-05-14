@@ -6,6 +6,7 @@ public class virus {
 
 	static int node[][];
 	static boolean check[];
+	static int cnt = 0 ; // dfs
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -20,8 +21,9 @@ public class virus {
 			node[a][b] = 1;
 			node[b][a] = 1;
 		}
-		BFS(1);
-
+//		BFS(1);
+		DFS(node, check, 1);
+		System.out.println(cnt-1);
 	}
 	
 	public static void BFS(int start) {
@@ -42,5 +44,17 @@ public class virus {
 		}
 		System.out.println(cnt);
 	}
-
+	
+	public static void DFS(int[][] node, boolean[] check, int v) {
+		
+		if(check[v] == true) return;
+		
+		check[v] = true;
+		cnt++;
+		for(int i = 1 ; i < node[v].length ; i++) {
+			if(node[v][i] == 1 && !check[i]) {
+				DFS(node,check,i);
+			}
+		}	
+	}
 }
