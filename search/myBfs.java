@@ -13,7 +13,7 @@ public class myBfs {
 	}
 	
 	public void BFS(int i) {
-		Queue<Integer> q = new LinkedList();
+		Queue<Integer> q = new LinkedList<Integer>();
 		q.offer(i);
 		visit[i] = true;
 		
