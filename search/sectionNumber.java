@@ -12,10 +12,11 @@ public class sectionNumber {
 	static int n = 0;
 	static Queue<Point> q = new LinkedList<>();
 	static ArrayList<Integer> list = new ArrayList<>();
+	static int num = 0;
+	static int cnt = 0;
 	
 	public static void BFS() {
 		int cnt = 0;
-		int num = 0;
 		for(int i = 0 ; i < n ; i++) {
 			for(int j = 0 ; j < n ; j++) {
 				if(a[i][j] == 1 && visit[i][j] == false) {
@@ -49,6 +50,19 @@ public class sectionNumber {
 		}
 	}
 	
+	public static int DFS(int i, int j) {
+		visit[i][j] = true;
+		for(int k = 0 ; k < 4 ; k++) {
+			int x = i + dx[k];
+			int y = j + dy[k];
+			if(x >=0 && y >=0 && x<n && y<n && a[x][y] == 1 && visit[x][y] == false) {
+				DFS(x, y);
+				cnt++;
+			}
+		}
+		return cnt;
+	}
+	
 	
 	public static void main(String[] args) {
 	
@@ -63,7 +77,23 @@ public class sectionNumber {
                 a[i][j] = input.charAt(j)-'0';
             }
         }
-		BFS();
+		
+		for(int i = 0 ; i < n ; i++) {
+			for(int j = 0 ; j < n ; j++) {
+				if(a[i][j] == 1 && visit[i][j] == false) {
+					num++;
+					cnt = 1;
+					DFS(i, j);
+					list.add(cnt);
+				}
+			}
+		}
+		Collections.sort(list);
+		System.out.println(num);
+		for(int i : list) {
+			System.out.println(i);
+		}
+//		BFS();
 	}
 
 }
