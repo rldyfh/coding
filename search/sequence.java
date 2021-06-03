@@ -1,4 +1,4 @@
-package bruteforce;
+package search;
 
 import java.util.*;
 
