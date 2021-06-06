@@ -4,46 +4,55 @@ import java.util.*;
 import java.awt.Point;
 
 public class tomato {
+	
+	
+	static int[] dx = { 0, 0, -1, 1 };
+    static int[] dy = { -1, 1, 0, 0 };
+    static int M;
+    static int N;
+    static int[][] tomato;
+    static Queue<Point> queue = new LinkedList<>();
+	
+	
+	public static int BFS() {
+		int result = 0;
+		while(!queue.isEmpty()) {
+			Point p = queue.poll();
+			for(int k = 0 ; k < 4 ; k++) {
+				int x = p.x + dx[k];
+				int y = p.y + dy[k];
+				if(0<=x && x< N && 0<=y && y <M && tomato[x][y] == 0) {
+					tomato[x][y] = tomato[p.x][p.y] + 1;
+					queue.add(new Point(x,y));
+					result = tomato[x][y];
+				}
+			}
+		}
+		
+		for(int i = 0 ; i < N ; i++) {
+			for(int j = 0 ; j < M ; j++) {
+				if(tomato[i][j] == 0) result = -1;
+			}
+		}
+		
+		if(result <= 0) return result;
+		else return result - 1;
+	}
+	
 
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
-        int[] dy = { -1, 1, 0, 0 };
-        int[] dx = { 0, 0, -1, 1 };
-        int M = sc.nextInt(), N = sc.nextInt();
-
-        int[][] tomato = new int[N][M];
-        int cnt = 0, days = 0;
-        Queue<int[]> que = new LinkedList<>();
-
-        for (int n = 0; n < N; n++)
-            for (int m = 0; m < M; m++) {
-                tomato[n][m] = sc.nextInt();
-                if (tomato[n][m] == 1)
-                    que.add(new int[] { n, m });
-                else if (tomato[n][m] == 0)
-                    cnt++;
-            }
-
-        while (cnt > 0 && !que.isEmpty()) {
-            for (int s = que.size(); s > 0; s--) {
-                int[] cur = que.poll();
-
-                for (int k = 0; k < 4; k++) {
-                    int ny = cur[0] + dy[k];
-                    int nx = cur[1] + dx[k];
-
-                    if (ny < 0 || nx < 0 || ny >= N || nx >= M || tomato[ny][nx] != 0)
-                        continue;
-
-                    cnt--;
-                    tomato[ny][nx] = 1;
-                    que.add(new int[] { ny, nx });
-                }
-            }
-            days++;
+		M = sc.nextInt();
+		N = sc.nextInt();
+        tomato = new int[N][M];
+        for(int i = 0 ; i < N ; i++) {
+        	for(int j = 0 ; j < M ; j++) {
+        		tomato[i][j] = sc.nextInt();
+        		if(tomato[i][j] == 1) queue.add(new Point(i, j));
+        	}
         }
-        System.out.println(cnt == 0 ? days : -1);
+        System.out.println(BFS());
 	}
 
 }
